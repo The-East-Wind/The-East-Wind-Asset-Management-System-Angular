@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Asset-Management-System-Angular';
+  title = 'Asset Management System';
+  isAuthenticated = false;
+  authenticate = () => {
+    this.isAuthenticated = true;
+  }
+  logout = () => {
+    this.isAuthenticated = false;
+  }
 }

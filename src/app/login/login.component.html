@@ -1,0 +1,30 @@
+<mat-card class="login-card mat-elevation-z8">
+    <!--<img matCardImage src="Card wide image source">-->
+  <form class="login-form" [formGroup]="loginForm" (ngSubmit)="login($event)">
+      <mat-card-content>
+          <mat-form-field class="login-full-width">
+            <mat-label>Username *</mat-label>
+            <input matInput [formControl]="loginForm.controls['username']" placeholder="Username">
+            <mat-error *ngIf="loginForm.controls['username'].hasError('required')">
+              Username is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="login-full-width">
+            <mat-label>Password *</mat-label>
+            <input matInput [formControl]="loginForm.controls['password']" type="password" placeholder="Password">
+            <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
+                  Password is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions align="start">
+        <button type="submit" mat-raised-button color="primary" class="login-full-width submit-button">Login<mat-icon>person</mat-icon></button>
+      </mat-card-actions>
+      <mat-card-footer>
+        <div class="login-full-width helper">
+          <a (click)="forgotCredentials()" href="#">Forgot username/password?</a>
+          <div *ngIf="forgot">Please contact GroupIT helpdesk</div>
+        </div>
+      </mat-card-footer>
+  </form>
+</mat-card>
