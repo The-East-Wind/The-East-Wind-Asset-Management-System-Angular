@@ -1,8 +1,20 @@
-<div class="container" fxLayout="column" fxFlexAlign="center center" fxFlex="100%">
+<div class="container" fxLayout="column" fxLayoutAlign="center center" fxFlex="100%" fxLayoutGap="1%">
   <mat-form-field class="table-filter">
     <input matInput (keyup)="applyFilter($event)" placeholder="Search Asset ID">
   </mat-form-field>
   <table mat-table [dataSource]="assetDataSource">
+
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox color="primary"
+          (click) = "$event.stopPropagation()"
+          (change) = "$event ? selectedAsset.toggle(row):null"
+          [checked]="selectedAsset.isSelected(row)"
+        ></mat-checkbox>
+      </td>
+    </ng-container>
+
     <ng-container matColumnDef="assetId">
       <th mat-header-cell *matHeaderCellDef> ID </th>
       <td mat-cell *matCellDef="let asset">{{asset.assetId}}</td>
@@ -29,6 +41,11 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="columnHeaders"></tr>
-    <tr mat-row *matRowDef="let row;columns: columnHeaders;"></tr>
+    <tr mat-row *matRowDef="let row;columns: columnHeaders;"
+    (click)="selectedAsset.toggle(row)"></tr>
   </table>
+
+  <div fxLayoutAlign="center">
+    <button mat-raised-button color="primary" (click)="openRequestForm()">Request Selected Asset</button>
+  </div>
 </div>

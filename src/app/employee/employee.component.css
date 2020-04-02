@@ -8,15 +8,16 @@
     width: 200%;
   }
 }
+
 table,.filter{
-  margin-left: auto;
-  margin-right: auto;
   width: 90%;
   text-align: justify;
 }
 th.mat-header-cell{
   text-align: justify;
 }
+
 .filter{
   font-size: large;
+  margin-top: 1%;
 }

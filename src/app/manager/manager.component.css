@@ -8,12 +8,16 @@
     width: 200%;
   }
 }
+
 table,.table-filter{
-  margin-left: auto;
-  margin-right: auto;
   width: 90%;
   text-align: justify;
 }
+.table-filter{
+  font-size: large;
+  margin-top: 1%;
+}
+
 th.mat-header-cell{
   text-align: justify;
 }

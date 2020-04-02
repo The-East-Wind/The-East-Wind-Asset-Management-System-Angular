@@ -1,3 +1,5 @@
+import { Request } from './../entities/Request';
+import { RequestService } from './../request.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,17 +11,46 @@ import { Component, OnInit } from '@angular/core';
 export class ViewStatusComponent implements OnInit {
   approved: number;
   requestStatus: string;
+  requests: Request[];
+  displaySpinner = false;
   viewStatusForm = new FormGroup({
     requestId: new FormControl('', [Validators.required, Validators.pattern(/^\d{1,}$/)])
   });
-  viewStatus = (event) => {
+  viewStatus = (event: Event) => {
+    event.preventDefault();
     if (this.viewStatusForm.valid) {
-      this.approved = 0;
-      this.requestStatus = 'Approved';
+      // TODO send request to serve instead of getting it from array when backend is ready
+      this.requestStatus = undefined;
+      this.displaySpinner = true;
+      const enteredRequestId = Number(this.viewStatusForm.value.requestId);
+      const requestWithId: Request = this.requests.filter(request => request.requestId === enteredRequestId)[0];
+      if (requestWithId === undefined) {
+        this.requestStatus = 'Invalid Request ID!';
+        this.approved = 2;
+      } else {
+        switch (requestWithId.status) {
+          case 'Approved': this.approved = 0; break;
+          case 'Pending': this.approved = 1; break;
+          case 'Rejected': this.approved = 2; break;
+        }
+        if (this.approved !== 1) {
+          this.requestStatus = `Your request is ${requestWithId.status}`;
+        } else {
+          this.requestStatus = `Your request is In Process`;
+        }
+      }
+      this.displaySpinner = false;
     }
   }
-  constructor() { }
-
+  // tslint:disable-next-line: variable-name
+  constructor(private _requestService: RequestService) {
+    this.fetchRequests();
+  }
+  fetchRequests = () => {
+    this._requestService.fetchRequests().subscribe((data: any) => {
+      this.requests = data;
+    });
+  }
   ngOnInit(): void {
   }
 

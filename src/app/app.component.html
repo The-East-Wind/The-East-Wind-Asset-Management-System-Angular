@@ -5,10 +5,10 @@
   </span>
   <span class="space-between"></span>
   <span>
-    <a mat-button routerLink="/employee" routerLinkActive="active" (click)="authenticate()">Employee</a>
+    <a mat-button routerLink="/employee" routerLinkActive="active" (click)="authenticate($event)">Employee</a>
   </span>
   <span>
-    <a mat-button routerLink="/manager" routerLinkActive="active" (click)="authenticate()">Manager</a>
+    <a mat-button routerLink="/manager" routerLinkActive="active" (click)="authenticate($event)">Manager</a>
   </span>
   <span *ngIf="isAuthenticated">
     <a mat-button routerLink="/" routerLinkActive="active" (click)="logout()">Logout<mat-icon>exit_to_app</mat-icon></a>

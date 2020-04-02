@@ -1,0 +1,5 @@
+[
+  {"requestId":1,"fromDate":"2020-04-03","toDate":"2020-05-31","requestedBy":{},"requestedFor":{},"status":"Approved","requestedAsset":{"assetId" : 1,"assetName":"HP Pavillion","assetDescription":"4Gb RAM-500Gb HDD-i5 7th gen","availability":"Available","allottedTo":{},"assetCategory":"Laptop"}},
+  {"requestId":2,"fromDate":"2020-04-03","toDate":"2020-05-31","requestedBy":{},"requestedFor":{},"status":"Pending","requestedAsset":{"assetId" : 4,"assetName":"Hp Deskjet","assetDescription":"Laser Color Printer","availability":"Available","allottedTo":{},"assetCategory":"Printer"}},
+  {"requestId":3,"fromDate":"2020-04-03","toDate":"2020-05-31","requestedBy":{},"requestedFor":{},"status":"Rejected","requestedAsset":{"assetId" : 8,"assetName":"Tp-Link Archer C6","assetDescription":"Wireless Dual Band Router-450 Mbps","availability":"Not Available","allottedTo":{},"assetCategory":"Router"}}
+]
