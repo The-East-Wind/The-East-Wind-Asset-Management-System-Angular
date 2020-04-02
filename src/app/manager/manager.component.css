@@ -1,5 +1,5 @@
 @media only screen and (max-width: 736px) and (orientation:portrait) {
-  table{
+  table,.table-filter{
     margin-left: 0;
     margin-right: 0;
     width: 100%;
@@ -8,7 +8,7 @@
     width: 200%;
   }
 }
-table,.filter{
+table,.table-filter{
   margin-left: auto;
   margin-right: auto;
   width: 90%;
@@ -16,7 +16,4 @@ table,.filter{
 }
 th.mat-header-cell{
   text-align: justify;
-}
-.filter{
-  font-size: large;
 }

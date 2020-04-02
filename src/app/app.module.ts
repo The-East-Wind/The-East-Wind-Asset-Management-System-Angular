@@ -21,13 +21,16 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
+import { ManagerComponent } from './manager/manager.component';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     ViewStatusComponent,
-    EmployeeComponent
+    EmployeeComponent,
+    ManagerComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,8 @@ import { MatTableModule } from '@angular/material/table';
     MatSelectModule,
     MatSlideToggleModule,
     MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    MatButtonToggleModule
   ],
   providers: [ AssetService ],
   bootstrap: [AppComponent]

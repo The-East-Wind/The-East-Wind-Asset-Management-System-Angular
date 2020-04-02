@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" class="header">
+<mat-toolbar color="primary" class="header" fxLayout fxLayout.lt-sm="column">
   <span>
     <button mat-button><mat-icon>home</mat-icon></button>
     <button mat-button>{{title}}</button>
@@ -7,12 +7,15 @@
   <span>
     <a mat-button routerLink="/employee" routerLinkActive="active" (click)="authenticate()">Employee</a>
   </span>
+  <span>
+    <a mat-button routerLink="/manager" routerLinkActive="active" (click)="authenticate()">Manager</a>
+  </span>
   <span *ngIf="isAuthenticated">
     <a mat-button routerLink="/" routerLinkActive="active" (click)="logout()">Logout<mat-icon>exit_to_app</mat-icon></a>
   </span>
 </mat-toolbar>
 <router-outlet *ngIf="isAuthenticated"></router-outlet>
-<div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center center" *ngIf="!isAuthenticated">
+<div class="container" fxLayout fxLayout.lt-sm="column" fxLayoutGap.lt-sm="20px" fxLayoutAlign="center center" *ngIf="!isAuthenticated">
   <div class="item-1" fxFlex="50%" fxLayoutAlign="center" fxFlexOrder.lt-sm="2">
     <app-view-status></app-view-status>
   </div>

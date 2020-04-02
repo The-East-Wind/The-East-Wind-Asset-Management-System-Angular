@@ -1,3 +1,8 @@
+@media only screen and (max-width:768px) and (orientation:portrait){
+  .header{
+    min-height: max-content;
+  }
+}
 .header{
   min-height: 10%;
 }
@@ -10,7 +15,6 @@
 
 .container{
   min-height: 90%;
-  background-color:lightcyan;
 }
 
 .space-between{
