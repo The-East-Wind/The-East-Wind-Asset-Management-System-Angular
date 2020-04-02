@@ -1,19 +1,28 @@
 <mat-card class="login-card mat-elevation-z8">
     <!--<img matCardImage src="Card wide image source">-->
-  <form class="login-form" [formGroup]="loginForm" (ngSubmit)="login($event)">
+  <form class="login-form" [formGroup]="loginForm" (ngSubmit)="authenticate($event)">
       <mat-card-content>
           <mat-form-field class="login-full-width">
             <mat-label>Username *</mat-label>
             <input matInput [formControl]="loginForm.controls['username']" placeholder="Username">
-            <mat-error *ngIf="loginForm.controls['username'].hasError('required')">
+            <mat-error *ngIf="loginForm.controls['username'].hasError('required') && !authenticationError">
               Username is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="loginForm.controls['username'].hasError('pattern') && !authenticationError">
+              Username should start with alphabet and can only contain alphabets and ".". Minimum length - 4
             </mat-error>
           </mat-form-field>
           <mat-form-field class="login-full-width">
             <mat-label>Password *</mat-label>
             <input matInput [formControl]="loginForm.controls['password']" type="password" placeholder="Password">
-            <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
-                  Password is <strong>required</strong>
+            <mat-error *ngIf="loginForm.controls['password'].hasError('required') && !authenticationError">
+              Password is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="loginForm.controls['password'].hasError('pattern') && !authenticationError">
+              <strong>Invalid password format.</strong>Enter valid value for password.
+            </mat-error>
+            <mat-error *ngIf="authenticationError">
+              <strong>Incorrect Username or Password</strong>
             </mat-error>
           </mat-form-field>
       </mat-card-content>

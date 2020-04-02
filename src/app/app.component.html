@@ -4,11 +4,11 @@
     <button mat-button>{{title}}</button>
   </span>
   <span class="space-between"></span>
-  <span>
-    <a mat-button routerLink="/employee" routerLinkActive="active" (click)="authenticate($event)">Employee</a>
+  <span *ngIf="isAuthenticated">
+    <a mat-button routerLink="/employee" routerLinkActive="active">Employee</a>
   </span>
-  <span>
-    <a mat-button routerLink="/manager" routerLinkActive="active" (click)="authenticate($event)">Manager</a>
+  <span *ngIf="isAuthenticated">
+    <a mat-button routerLink="/manager" routerLinkActive="active">Manager</a>
   </span>
   <span *ngIf="isAuthenticated">
     <a mat-button routerLink="/" routerLinkActive="active" (click)="logout()">Logout<mat-icon>exit_to_app</mat-icon></a>
@@ -20,6 +20,6 @@
     <app-view-status></app-view-status>
   </div>
   <div class="item-2" fxFlex="50%" fxLayoutAlign="center">
-    <app-login></app-login>
+    <app-login (authenticationEvent)="authenticate($event)"></app-login>
   </div>
 </div>

@@ -1,3 +1,4 @@
+import { RequestService } from './request.service';
 import { AssetService } from './asset.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -25,6 +26,7 @@ import { ManagerComponent } from './manager/manager.component';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { AuthService } from './auth.service';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatProgressSpinnerModule,
     MatCheckboxModule
   ],
-  providers: [ AssetService ],
+  providers: [ AssetService, RequestService, AuthService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
