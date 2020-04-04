@@ -1,3 +1,7 @@
+import { HttpErrorResponse } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
+import { RequestService } from './../request.service';
+import { EmployeeService } from './../employee.service';
 import { Request } from './../entities/Request';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
@@ -7,6 +11,8 @@ import { Component, OnInit } from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatDialog } from '@angular/material/dialog';
 import { NewRequestComponent } from '../new-request/new-request.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-manager',
@@ -20,8 +26,11 @@ export class ManagerComponent implements OnInit {
   columnHeaders: string[];
   selectedAsset = new SelectionModel<Asset>(false, []);
   noneSelected: boolean;
-  // tslint:disable-next-line: variable-name
-  constructor(private _assetService: AssetService, private _router: Router, private _dialog: MatDialog) {
+  constructor(
+    // tslint:disable-next-line: variable-name
+    private _assetService: AssetService, private _router: Router, private _dialog: MatDialog,
+    // tslint:disable-next-line: variable-name
+    private _employeeService: EmployeeService, private _requestService: RequestService, private _snackBar: MatSnackBar) {
     this.fetchAssets();
   }
   fetchAssets = () => {
@@ -46,12 +55,30 @@ export class ManagerComponent implements OnInit {
       this.noneSelected = false;
       const newRequest = new Request();
       newRequest.requestedAsset = this.selectedAsset.selected[0];
+      newRequest.requestedBy = this._employeeService.user;
+      newRequest.requestId = 10;
+      newRequest.status = 'Pending';
       const dialogRef = this._dialog.open(NewRequestComponent, {
-        maxWidth: '250px', maxHeight: '300px'
+        maxWidth: '350px', maxHeight: '500px'
       });
       dialogRef.afterClosed().subscribe(formData => {
         this.selectedAsset.clear();
-        console.log(formData);
+        if (formData !== undefined) {
+          newRequest.fromDate = formData.fromDate;
+          newRequest.toDate = formData.toDate;
+          newRequest.requestedFor = formData.requestedFor;
+          this._requestService.addNewRequest(newRequest).pipe(catchError((error: HttpErrorResponse) => {
+            this._snackBar.open('Uh-oh! An Error occurred. Please try again later', '', {
+              duration: 10000, panelClass: 'failure', verticalPosition: 'bottom'
+            });
+            return throwError('Error adding Request.');
+          })).subscribe((data: any) => {
+            console.log(data);
+            this._snackBar.open('Request was submitted successfully ! Request ID is: 10', '', {
+              duration: 10000, panelClass: 'success', verticalPosition: 'bottom'
+            });
+          });
+        }
       });
     } else {
       this.noneSelected = true;

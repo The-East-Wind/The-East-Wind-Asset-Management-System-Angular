@@ -58,15 +58,15 @@ export class LoginComponent implements OnInit {
   setAuthenticationFlags(username: string): void {
     if (username !== undefined) {
       this._employeeService.fetchEmployeeWithUsername(username).subscribe((data: any) => {
-        this.user = data[0];
-        if (this.user !== undefined) {
-          switch (this.user.employeeDesignation) {
+        this._employeeService.user = data[0];
+        if (this._employeeService.user !== undefined) {
+          switch (this._employeeService.user.employeeDesignation) {
             case 'Employee': this._authService.isEmployee = true; break;
             case 'Manager': this._authService.isManager = true; break;
             case 'Admin': this._authService.isAdmin = true; break;
           }
           this.isAuthenticated = true;
-          const path = '/' + this.user.employeeDesignation.toLowerCase();
+          const path = '/' + this._employeeService.user.employeeDesignation.toLowerCase();
           this._router.navigate([path]);
         }
       });
@@ -74,13 +74,13 @@ export class LoginComponent implements OnInit {
   }
 
   logout = () => {
-    switch (this.user.employeeDesignation) {
+    switch (this._employeeService.user.employeeDesignation) {
       case 'Employee': this._authService.isEmployee = false; break;
       case 'Manager': this._authService.isManager = false; break;
       case 'Admin': this._authService.isAdmin = false; break;
     }
     this.isAuthenticated = false;
-    this.user = undefined;
+    this._employeeService.user = undefined;
   }
   // tslint:disable-next-line: variable-name
   constructor(private _authService: AuthService, private _router: Router, private _employeeService: EmployeeService) { }

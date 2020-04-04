@@ -1,4 +1,5 @@
 export interface Asset {
+  id: number;
   assetId: number;
   assetName: string;
   assetDescription: string;

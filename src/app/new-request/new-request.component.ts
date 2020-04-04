@@ -1,3 +1,4 @@
+import { EmployeeService } from './../employee.service';
 import { Request } from './../entities/Request';
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -13,12 +14,14 @@ export class NewRequestComponent implements OnInit {
   maxFromDate: Date;
   minToDate: Date;
   maxToDate: Date;
+  validEmployee = true;
   assetRequestForm = new FormGroup({
     fromDate: new FormControl(new Date(), Validators.required),
     toDate : new FormControl(new Date(), Validators.required),
-    requestedFor: new FormControl('', [Validators.required, Validators.pattern(/^[1-9][0-9]{3}$/)])
+    requestedFor: new FormControl('', [Validators.required, Validators.pattern(/^[1-9][0-9]{4}$/)])
   });
-  constructor(public dialogRef: MatDialogRef<NewRequestComponent>) {
+  // tslint:disable-next-line: variable-name
+  constructor(public dialogRef: MatDialogRef<NewRequestComponent>, private _employeeService: EmployeeService) {
     const today = new Date();
     this.minFromDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
     this.maxFromDate = new Date(today.getFullYear(), today.getMonth() + 3, today.getDate());
@@ -34,8 +37,20 @@ export class NewRequestComponent implements OnInit {
     this.maxToDate = new Date(fromDate.getFullYear(), fromDate.getMonth() + 3, fromDate.getDate());
   }
   submitFormData(): void {
+    this.validEmployee = true;
     if (this.assetRequestForm.valid) {
-      this.dialogRef.close(this.assetRequestForm.value);
+      this._employeeService.fetchEmployeeWithId(Number(this.assetRequestForm.value.requestedFor)).subscribe((data: any) => {
+        if (data.length === 0) {
+          this.validEmployee = false;
+          this.assetRequestForm.setValue({
+            fromDate: this.assetRequestForm.value.fromDate, toDate: this.assetRequestForm.value.toDate, requestedFor: ''});
+        } else {
+          this.validEmployee = true;
+          this.assetRequestForm.setValue({
+            fromDate: this.assetRequestForm.value.fromDate, toDate: this.assetRequestForm.value.toDate, requestedFor: data[0]});
+          this.dialogRef.close(this.assetRequestForm.value);
+        }
+      });
     }
   }
   closeDialog(): void {

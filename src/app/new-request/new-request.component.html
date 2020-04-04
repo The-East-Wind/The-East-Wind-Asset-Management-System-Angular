@@ -15,11 +15,14 @@
     <mat-form-field class="full-width">
       <mat-label>Requested For *</mat-label>
       <input matInput [formControl]="assetRequestForm.controls['requestedFor']" placeholder="Employee ID">
-      <mat-error *ngIf="assetRequestForm.controls['requestedFor'].hasError('required')">
+      <mat-error *ngIf="assetRequestForm.controls['requestedFor'].hasError('required') && validEmployee">
         This field <strong>cannot be empty</strong>
       </mat-error>
-      <mat-error *ngIf="assetRequestForm.controls['requestedFor'].hasError('pattern')">
-        Employee ID should be a <strong>4 digit</strong> number.
+      <mat-error *ngIf="assetRequestForm.controls['requestedFor'].hasError('pattern') && validEmployee">
+        Employee ID should be a <strong>5 digit</strong> number.
+      </mat-error>
+      <mat-error *ngIf='!validEmployee'>
+        <strong>Employee doesn't exist.Enter Valid ID.</strong>
       </mat-error>
     </mat-form-field>
   </div>

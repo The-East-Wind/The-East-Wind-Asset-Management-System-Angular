@@ -8,11 +8,18 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class EmployeeService {
-
+  user: Employee;
+  private serverUrl = 'http://localhost:3000/employees';
   // tslint:disable-next-line: variable-name
   constructor(private _http: HttpClient) { }
   fetchEmployeeWithUsername(username: string): Observable<Employee> {
-    const url = `http://localhost:3000/employees?username=${username}`;
+    const url = `${this.serverUrl}?username=${username}`;
+    return this._http.get<Employee>(url).pipe(retry(1), catchError(() => {
+      return throwError('Error fetching employee details');
+    }));
+  }
+  fetchEmployeeWithId(employeeId: number): Observable<Employee> {
+    const url = `${this.serverUrl}?employeeId=${employeeId}`;
     return this._http.get<Employee>(url).pipe(retry(1), catchError(() => {
       return throwError('Error fetching employee details');
     }));

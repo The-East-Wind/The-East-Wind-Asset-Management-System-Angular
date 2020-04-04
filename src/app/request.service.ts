@@ -1,6 +1,7 @@
+import { Request } from './entities/Request';
 import { retry, catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -20,5 +21,15 @@ export class RequestService {
     return this._http.get<Request>(url).pipe(retry(1), catchError(() => {
       return throwError('Error Fetching Request');
     }));
+  }
+
+  addNewRequest(newRequest: Request): Observable<Request> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    newRequest.id = 10;
+    return this._http.post<Request>(this.localUrl, newRequest, httpOptions);
   }
 }

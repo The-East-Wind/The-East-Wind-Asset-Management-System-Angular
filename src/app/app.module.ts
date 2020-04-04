@@ -32,7 +32,8 @@ import { NewRequestComponent } from './new-request/new-request.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { EmployeeService } from './employee.service';
-
+import { AcknowledgementComponent } from './acknowledgement/acknowledgement.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +42,8 @@ import { EmployeeService } from './employee.service';
     EmployeeComponent,
     ManagerComponent,
     AccessDeniedComponent,
-    NewRequestComponent
+    NewRequestComponent,
+    AcknowledgementComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +67,8 @@ import { EmployeeService } from './employee.service';
     MatProgressSpinnerModule,
     MatCheckboxModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSnackBarModule
   ],
   entryComponents: [ NewRequestComponent ],
   providers: [ AssetService, RequestService, AuthService, EmployeeService ],
