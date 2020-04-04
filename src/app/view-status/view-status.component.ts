@@ -11,7 +11,6 @@ import { Component, OnInit } from '@angular/core';
 export class ViewStatusComponent implements OnInit {
   approved: number;
   requestStatus: string;
-  requests: Request[];
   displaySpinner = false;
   viewStatusForm = new FormGroup({
     requestId: new FormControl('', [Validators.required, Validators.pattern(/^\d{1,}$/)])
@@ -23,33 +22,29 @@ export class ViewStatusComponent implements OnInit {
       this.requestStatus = undefined;
       this.displaySpinner = true;
       const enteredRequestId = Number(this.viewStatusForm.value.requestId);
-      const requestWithId: Request = this.requests.filter(request => request.requestId === enteredRequestId)[0];
-      if (requestWithId === undefined) {
-        this.requestStatus = 'Invalid Request ID!';
-        this.approved = 2;
-      } else {
-        switch (requestWithId.status) {
-          case 'Approved': this.approved = 0; break;
-          case 'Pending': this.approved = 1; break;
-          case 'Rejected': this.approved = 2; break;
-        }
-        if (this.approved !== 1) {
-          this.requestStatus = `Your request is ${requestWithId.status}`;
+      this._requestService.fetchRequestWithId(enteredRequestId).subscribe((data: any) => {
+        const requestWithId: Request = data[0];
+        if (requestWithId === undefined) {
+          this.requestStatus = 'Invalid Request ID!';
+          this.approved = 2;
         } else {
-          this.requestStatus = `Your request is In Process`;
+          switch (requestWithId.status) {
+            case 'Approved': this.approved = 0; break;
+            case 'Pending': this.approved = 1; break;
+            case 'Rejected': this.approved = 2; break;
+          }
+          if (this.approved !== 1) {
+            this.requestStatus = `Your request is ${requestWithId.status}`;
+          } else {
+            this.requestStatus = `Your request is In Process`;
+          }
         }
-      }
-      this.displaySpinner = false;
+        this.displaySpinner = false;
+      });
     }
   }
   // tslint:disable-next-line: variable-name
   constructor(private _requestService: RequestService) {
-    this.fetchRequests();
-  }
-  fetchRequests = () => {
-    this._requestService.fetchRequests().subscribe((data: any) => {
-      this.requests = data;
-    });
   }
   ngOnInit(): void {
   }

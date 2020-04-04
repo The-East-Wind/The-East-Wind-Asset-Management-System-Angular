@@ -28,6 +28,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AuthService } from './auth/auth.service';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
+import { NewRequestComponent } from './new-request/new-request.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { EmployeeService } from './employee.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +40,8 @@ import { AccessDeniedComponent } from './access-denied/access-denied.component';
     ViewStatusComponent,
     EmployeeComponent,
     ManagerComponent,
-    AccessDeniedComponent
+    AccessDeniedComponent,
+    NewRequestComponent
   ],
   imports: [
     BrowserModule,
@@ -58,9 +63,12 @@ import { AccessDeniedComponent } from './access-denied/access-denied.component';
     MatTableModule,
     MatButtonToggleModule,
     MatProgressSpinnerModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
-  providers: [ AssetService, RequestService, AuthService ],
+  entryComponents: [ NewRequestComponent ],
+  providers: [ AssetService, RequestService, AuthService, EmployeeService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

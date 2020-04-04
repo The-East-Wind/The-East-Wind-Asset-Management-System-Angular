@@ -1,5 +1,5 @@
 import { Asset } from './Asset';
-export interface Request {
+export class Request {
   requestId: number;
   fromDate: Date;
   toDate: Date;

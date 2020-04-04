@@ -7,10 +7,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { ManagerGuard } from './auth/manager.guard';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { LoginComponent } from './login/login.component';
+import { NewRequestComponent } from './new-request/new-request.component';
 
 
 const routes: Routes = [{path: 'employee', component: EmployeeComponent, canActivate: [AuthGuard]},
-{path: 'manager', component: ManagerComponent, canActivate: [ManagerGuard], children: [{path: 'status', component: ViewStatusComponent}]},
+{path: 'manager', component: ManagerComponent, canActivate: [ManagerGuard], children: [{path: 'request', component: NewRequestComponent}]},
 {path: 'access-denied', component: AccessDeniedComponent},
 {path: 'login', component: LoginComponent},
 {path: 'view-status', component: ViewStatusComponent},

@@ -1,7 +1,7 @@
 import { retry, catchError } from 'rxjs/operators';
 import { Credential } from '../entities/credential';
 import { Observable, throwError } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -16,9 +16,12 @@ export class AuthService {
   // tslint:disable-next-line: variable-name
   constructor(private _http: HttpClient) {
   }
-  fetchCredentials(): Observable<Credential> {
-    return this._http.get<Credential>(this.localUrl).pipe(retry(1), catchError(() => {
-      return throwError('Error fetching credentials.json');
+
+  // @TODO make method to post once original backend is ready
+  fetchCredentials(enteredCredentials: Credential): Observable<Credential> {
+    const url = `http://localhost:3000/credentials?username=${enteredCredentials.username}`;
+    return this._http.get<Credential>(url).pipe(retry(1), catchError(() => {
+      return throwError('Error fetching credentials');
     }));
   }
 }

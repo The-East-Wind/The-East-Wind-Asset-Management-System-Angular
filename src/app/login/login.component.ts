@@ -1,3 +1,5 @@
+import { EmployeeService } from './../employee.service';
+import { Employee } from './../entities/Employee';
 import { Router } from '@angular/router';
 import { Credential } from './../entities/credential';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -11,7 +13,7 @@ import { AuthService } from '../auth/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  userDesignation: string;
+  user: Employee;
   isAuthenticated: boolean;
 
   loginForm = new FormGroup({
@@ -29,16 +31,21 @@ export class LoginComponent implements OnInit {
   authenticate = (event: Event) => {
     event.preventDefault();
     if (this.loginForm.valid) {
-      this._authService.fetchCredentials().subscribe((data: any) => {
-        const enteredData = this.loginForm.value;
-        const credentials = data.filter(user => user.username === enteredData.username)[0];
+      // tslint:disable-next-line: prefer-const
+      const enteredCredentials: Credential = {
+        username: this.loginForm.value.username, password: this.loginForm.value.password, designation: '' };
+      this._authService.fetchCredentials(enteredCredentials).subscribe((data: any) => {
+        // const enteredData = this.loginForm.value;
+        // const credentials = data.filter(user => user.username === enteredData.username)[0];
+        const credentials = data[0];
         if (credentials === undefined) {
           this.authenticationError = true;
           this.loginForm.setValue({username: '', password: ''});
         } else {
-          if (credentials.password === enteredData.password) {
+          // tslint:disable-next-line: no-string-literal
+          if (credentials.password === enteredCredentials['password']) {
             // this.authenticationEvent.emit(credentials);
-            this.setAuthenticationFlags(credentials);
+            this.setAuthenticationFlags(credentials.username);
           } else {
             this.authenticationError = true;
             this.loginForm.setValue({username: '', password: ''});
@@ -48,30 +55,35 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  setAuthenticationFlags(authCredentials: Credential): void {
-    if (authCredentials !== undefined) {
-      this.userDesignation = authCredentials.designation;
-      switch (this.userDesignation) {
-        case 'Employee': this._authService.isEmployee = true; break;
-        case 'Manager': this._authService.isManager = true; break;
-        case 'Admin': this._authService.isAdmin = true; break;
-      }
-      this.isAuthenticated = true;
-      const path = '/' + authCredentials.designation.toLowerCase();
-      this._router.navigate([path]);
+  setAuthenticationFlags(username: string): void {
+    if (username !== undefined) {
+      this._employeeService.fetchEmployeeWithUsername(username).subscribe((data: any) => {
+        this.user = data[0];
+        if (this.user !== undefined) {
+          switch (this.user.employeeDesignation) {
+            case 'Employee': this._authService.isEmployee = true; break;
+            case 'Manager': this._authService.isManager = true; break;
+            case 'Admin': this._authService.isAdmin = true; break;
+          }
+          this.isAuthenticated = true;
+          const path = '/' + this.user.employeeDesignation.toLowerCase();
+          this._router.navigate([path]);
+        }
+      });
     }
   }
 
   logout = () => {
-    switch (this.userDesignation) {
+    switch (this.user.employeeDesignation) {
       case 'Employee': this._authService.isEmployee = false; break;
       case 'Manager': this._authService.isManager = false; break;
       case 'Admin': this._authService.isAdmin = false; break;
     }
     this.isAuthenticated = false;
+    this.user = undefined;
   }
   // tslint:disable-next-line: variable-name
-  constructor(private _authService: AuthService, private _router: Router) { }
+  constructor(private _authService: AuthService, private _router: Router, private _employeeService: EmployeeService) { }
 
   ngOnInit(): void {
   }

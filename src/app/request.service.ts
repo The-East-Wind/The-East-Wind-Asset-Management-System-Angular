@@ -7,12 +7,18 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class RequestService {
-  localUrl = './assets/requests.json';
+  localUrl = 'http://localhost:3000/requests';
   // tslint:disable-next-line: variable-name
   constructor(private _http: HttpClient) { }
   fetchRequests = (): Observable<Request> => {
     return this._http.get<Request>(this.localUrl).pipe(retry(1), catchError(() => {
       return throwError('Error Reading requests.json');
+    }));
+  }
+  fetchRequestWithId(requestId: number): Observable<Request> {
+    const url = `http://localhost:3000/requests?requestId=${requestId}`;
+    return this._http.get<Request>(url).pipe(retry(1), catchError(() => {
+      return throwError('Error Fetching Request');
     }));
   }
 }

@@ -47,5 +47,6 @@
 
   <div fxLayoutAlign="center">
     <button mat-raised-button color="primary" (click)="openRequestForm()">Request Selected Asset</button>
+    <button mat-button color="warn" *ngIf="noneSelected">No asset Selected!Please select an asset and continue</button>
   </div>
 </div>

@@ -7,7 +7,7 @@ import { retry, catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AssetService {
-  localUrl = './assets/assets.json';
+  localUrl = 'http://localhost:3000/assets';
   assets: Asset[];
   constructor(private http: HttpClient) {
     this.getAssets();
