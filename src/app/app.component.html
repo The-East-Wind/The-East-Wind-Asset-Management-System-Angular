@@ -4,22 +4,17 @@
     <button mat-button>{{title}}</button>
   </span>
   <span class="space-between"></span>
-  <span *ngIf="isAuthenticated">
-    <a mat-button routerLink="/employee" routerLinkActive="active">Employee</a>
+  <span>
+    <a mat-button routerLink="/view-status" routerLinkActive="active">View Request Status</a>
+  </span>
+  <span *ngIf="!isAuthenticated">
+    <a mat-button routerLink="/login" routerLinkActive="active">Login</a>
   </span>
   <span *ngIf="isAuthenticated">
-    <a mat-button routerLink="/manager" routerLinkActive="active">Manager</a>
+    <a mat-button [routerLink]="home">Home<mat-icon>account_box</mat-icon></a>
   </span>
   <span *ngIf="isAuthenticated">
-    <a mat-button routerLink="/" routerLinkActive="active" (click)="logout()">Logout<mat-icon>exit_to_app</mat-icon></a>
+    <a mat-button routerLink="/" routerLinkActive="active">Logout<mat-icon>exit_to_app</mat-icon></a>
   </span>
 </mat-toolbar>
-<router-outlet *ngIf="isAuthenticated"></router-outlet>
-<div class="container" fxLayout fxLayout.lt-sm="column" fxLayoutGap.lt-sm="20px" fxLayoutAlign="center center" *ngIf="!isAuthenticated">
-  <div class="item-1" fxFlex="50%" fxLayoutAlign="center" fxFlexOrder.lt-sm="2">
-    <app-view-status></app-view-status>
-  </div>
-  <div class="item-2" fxFlex="50%" fxLayoutAlign="center">
-    <app-login (authenticationEvent)="authenticate($event)"></app-login>
-  </div>
-</div>
+<router-outlet (activate)="changeNavBar($event)" (deactivate)="logout()"></router-outlet>

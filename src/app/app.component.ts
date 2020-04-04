@@ -1,5 +1,6 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,22 +8,60 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor(private router: Router) {
+  constructor(private router: Router, private auth: AuthService) {
   }
   title = 'Asset Management System';
-  isAuthenticated = false;
-
-  authenticate = (isAuthenticated: boolean) => {
-    if (isAuthenticated === true) {
-      this.isAuthenticated = isAuthenticated;
-      this.router.navigate(['/employee']);
+  isAuthenticated: boolean;
+  isManager: boolean;
+  userDesignation: string;
+  home: string[];
+  /* authenticate = (authCredentials: Credential) => {
+    if (authCredentials !== undefined) {
+      this.userDesignation = authCredentials.designation;
+      switch (this.userDesignation) {
+        case 'Employee': this.auth.isEmployee = true; break;
+        case 'Manager': this.auth.isManager = true; break;
+        case 'Admin': this.auth.isAdmin = true; break;
+      }
+      this.isAuthenticated = true;
+      const path = '/' + authCredentials.designation.toLowerCase();
+      this.router.navigate([path]);
+    }
+  }
+ */
+  /* logout = () => {
+    switch (this.userDesignation) {
+      case 'Employee': this.auth.isEmployee = false; break;
+      case 'Manager': this.auth.isManager = false; break;
+      case 'Admin': this.auth.isAdmin = false; break;
+    }
+    this.isAuthenticated = false;
+  } */
+  changeNavBar(event: Event): void {
+    switch (this.router.routerState.snapshot.url) {
+      case '/login' : this.isAuthenticated = false ; break;
+      case '/employee' : {
+        this.isAuthenticated = true;
+        this.home = [this.router.routerState.snapshot.url];
+                        }break;
+      case '/manager' : {
+        this.isAuthenticated = true;
+        this.home = [this.router.routerState.snapshot.url];
+                        }break;
+      case '/admin' : {
+        this.isAuthenticated = true;
+        this.home = [this.router.routerState.snapshot.url];
+                      }break;
     }
   }
 
-  logout = () => {
-    this.isAuthenticated = false;
+  logout(): void {
+    if (this.router.routerState.snapshot.url === '/login') {
+      this.auth.isAdmin = false;
+      this.auth.isEmployee = false;
+      this.auth.isManager = false;
+    }
   }
-
   ngOnInit() {
   }
 }

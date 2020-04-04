@@ -26,7 +26,8 @@ import { ManagerComponent } from './manager/manager.component';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { AuthService } from './auth.service';
+import { AuthService } from './auth/auth.service';
+import { AccessDeniedComponent } from './access-denied/access-denied.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { AuthService } from './auth.service';
     LoginComponent,
     ViewStatusComponent,
     EmployeeComponent,
-    ManagerComponent
+    ManagerComponent,
+    AccessDeniedComponent
   ],
   imports: [
     BrowserModule,

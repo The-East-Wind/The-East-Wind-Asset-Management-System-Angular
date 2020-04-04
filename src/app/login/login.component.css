@@ -24,3 +24,6 @@
 .helper{
   font-size: medium;
 }
+ .container{
+   min-height: 90%;
+ }
