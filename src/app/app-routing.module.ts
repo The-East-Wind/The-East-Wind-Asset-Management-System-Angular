@@ -1,3 +1,4 @@
+import { ManageAssetComponent } from './manage-asset/manage-asset.component';
 import { ViewRequestComponent } from './view-request/view-request.component';
 import { NewAssetComponent } from './new-asset/new-asset.component';
 import { AdminGuard } from './auth/admin.guard';
@@ -15,7 +16,10 @@ import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
 {path: 'admin', component: AdminComponent, canActivate: [AdminGuard], children: [
-  {path: 'new', component: NewAssetComponent}, {path: 'view-requests', component: ViewRequestComponent}]},
+  {path: 'new', component: NewAssetComponent},
+  {path: 'view-requests', component: ViewRequestComponent},
+  {path: 'manage', component: ManageAssetComponent}
+]},
 {path: 'employee', component: EmployeeComponent, canActivate: [AuthGuard]},
 {path: 'manager', component: ManagerComponent, canActivate: [ManagerGuard]},
 {path: 'access-denied', component: AccessDeniedComponent},

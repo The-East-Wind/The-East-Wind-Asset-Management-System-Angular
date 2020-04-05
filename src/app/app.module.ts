@@ -40,6 +40,7 @@ import { NewAssetComponent } from './new-asset/new-asset.component';
 import { ViewRequestComponent } from './view-request/view-request.component';
 import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { ManageAssetComponent } from './manage-asset/manage-asset.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     AcknowledgementComponent,
     AdminComponent,
     NewAssetComponent,
-    ViewRequestComponent
+    ViewRequestComponent,
+    ManageAssetComponent
   ],
   imports: [
     BrowserModule,

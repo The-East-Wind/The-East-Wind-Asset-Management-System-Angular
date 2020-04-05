@@ -45,4 +45,14 @@ export class AssetService {
     const url = `${this.localUrl}/${assetId}`;
     return this._http.get<Asset>(url);
   }
+
+  deleteAssetWithId(toBeDeletedAsset: Asset): Observable<Asset> {
+    const url = `${this.localUrl}/${toBeDeletedAsset.id}`;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    return this._http.delete<Asset>(url, httpOptions);
+  }
 }

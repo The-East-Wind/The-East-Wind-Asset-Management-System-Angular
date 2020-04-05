@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
-  links: string[] = ['/admin/view-requests', '/admin/new', '/admin/update'];
-  labels: string[] = ['View Pending Requests', 'Add New Asset', 'Delete/Modify Asset'];
+  links: string[] = ['/admin/view-requests', '/admin/new', '/admin/manage'];
+  labels: string[] = ['View Pending Requests', 'Add New Asset', 'Manage Assets'];
   activeLink = this.links[0];
   // tslint:disable-next-line: variable-name
   constructor(private _router: Router) {
