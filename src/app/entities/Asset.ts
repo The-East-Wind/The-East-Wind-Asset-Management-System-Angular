@@ -1,6 +1,5 @@
-export interface Asset {
+export class Asset {
   id: number;
-  assetId: number;
   assetName: string;
   assetDescription: string;
   availability: string;

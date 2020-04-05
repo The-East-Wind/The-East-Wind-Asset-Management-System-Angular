@@ -5,11 +5,11 @@
       <mat-card-content class="form-body">
         <mat-form-field class="full-width">
           <mat-label>Request ID *</mat-label>
-          <input matInput type="text" [formControl]="viewStatusForm.controls['requestId']" placeholder="Request ID">
-          <mat-error *ngIf="viewStatusForm.controls['requestId'].hasError('required')">
+          <input matInput type="text" [formControl]="viewStatusForm.controls['id']" placeholder="Request ID">
+          <mat-error *ngIf="viewStatusForm.controls['id'].hasError('required')">
             Request ID is <strong>required</strong>
           </mat-error>
-          <mat-error *ngIf="viewStatusForm.controls['requestId'].hasError('pattern')">
+          <mat-error *ngIf="viewStatusForm.controls['id'].hasError('pattern')">
             Request ID should be <strong>a number</strong>
           </mat-error>
         </mat-form-field>

@@ -1,9 +1,8 @@
 import { Asset } from './Asset';
 export class Request {
   id: number;
-  requestId: number;
-  fromDate: Date;
-  toDate: Date;
+  fromDate: string;
+  toDate: string;
   status: string;
   requestedBy: object;
   requestedFor: object;

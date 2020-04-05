@@ -34,6 +34,13 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { EmployeeService } from './employee.service';
 import { AcknowledgementComponent } from './acknowledgement/acknowledgement.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { AdminComponent } from './admin/admin.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { NewAssetComponent } from './new-asset/new-asset.component';
+import { ViewRequestComponent } from './view-request/view-request.component';
+import { MatListModule } from '@angular/material/list';
+import { MatExpansionModule } from '@angular/material/expansion';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +50,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ManagerComponent,
     AccessDeniedComponent,
     NewRequestComponent,
-    AcknowledgementComponent
+    AcknowledgementComponent,
+    AdminComponent,
+    NewAssetComponent,
+    ViewRequestComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +78,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatCheckboxModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTabsModule,
+    MatListModule,
+    MatExpansionModule
   ],
   entryComponents: [ NewRequestComponent ],
   providers: [ AssetService, RequestService, AuthService, EmployeeService ],

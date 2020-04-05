@@ -13,7 +13,7 @@ export class ViewStatusComponent implements OnInit {
   requestStatus: string;
   displaySpinner = false;
   viewStatusForm = new FormGroup({
-    requestId: new FormControl('', [Validators.required, Validators.pattern(/^\d{1,}$/)])
+    id: new FormControl('', [Validators.required, Validators.pattern(/^\d{1,}$/)])
   });
   viewStatus = (event: Event) => {
     event.preventDefault();
@@ -21,8 +21,9 @@ export class ViewStatusComponent implements OnInit {
       // TODO send request to serve instead of getting it from array when backend is ready
       this.requestStatus = undefined;
       this.displaySpinner = true;
-      const enteredRequestId = Number(this.viewStatusForm.value.requestId);
-      this._requestService.fetchRequestWithId(enteredRequestId).subscribe((data: any) => {
+      const enteredid = Number(this.viewStatusForm.value.id);
+      this._requestService.fetchRequestWithId(enteredid).subscribe((data: any) => {
+        console.log(data);
         const requestWithId: Request = data[0];
         if (requestWithId === undefined) {
           this.requestStatus = 'Invalid Request ID!';

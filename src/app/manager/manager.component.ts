@@ -40,7 +40,7 @@ export class ManagerComponent implements OnInit {
       this.columnHeaders = Object.keys(this.assets[0]).filter(key => key !== 'allottedTo');
       this.columnHeaders.unshift('select');
       this.assetDataSource.filterPredicate = (filterData, filter: string) => {
-        return filterData.assetId === Number(filter);
+        return filterData.id === Number(filter);
       };
     });
   }
@@ -51,12 +51,12 @@ export class ManagerComponent implements OnInit {
     this.assetDataSource.filter = filter;
   }
   openRequestForm = (): void => {
-    if  (this.selectedAsset.selected.length !== 0) {
+    if  (this.selectedAsset.hasValue()) {
       this.noneSelected = false;
       const newRequest = new Request();
       newRequest.requestedAsset = this.selectedAsset.selected[0];
       newRequest.requestedBy = this._employeeService.user;
-      newRequest.requestId = 10;
+      // newRequest.id = 10;
       newRequest.status = 'Pending';
       const dialogRef = this._dialog.open(NewRequestComponent, {
         maxWidth: '350px', maxHeight: '500px'
@@ -64,8 +64,8 @@ export class ManagerComponent implements OnInit {
       dialogRef.afterClosed().subscribe(formData => {
         this.selectedAsset.clear();
         if (formData !== undefined) {
-          newRequest.fromDate = formData.fromDate;
-          newRequest.toDate = formData.toDate;
+          newRequest.fromDate = this.dateFormatter(formData.fromDate);
+          newRequest.toDate = this.dateFormatter(formData.toDate);
           newRequest.requestedFor = formData.requestedFor;
           this._requestService.addNewRequest(newRequest).pipe(catchError((error: HttpErrorResponse) => {
             this._snackBar.open('Uh-oh! An Error occurred. Please try again later', '', {
@@ -73,8 +73,8 @@ export class ManagerComponent implements OnInit {
             });
             return throwError('Error adding Request.');
           })).subscribe((data: any) => {
-            console.log(data);
-            this._snackBar.open('Request was submitted successfully ! Request ID is: 10', '', {
+            // console.log(data);
+            this._snackBar.open(`Request was submitted successfully ! Request ID is: ${data.id}`, '', {
               duration: 10000, panelClass: 'success', verticalPosition: 'bottom'
             });
           });
@@ -83,5 +83,10 @@ export class ManagerComponent implements OnInit {
     } else {
       this.noneSelected = true;
     }
+  }
+  dateFormatter(date: Date): string {
+    let formattedDate: string;
+    formattedDate = date.toJSON();
+    return formattedDate.slice(0, formattedDate.indexOf('T'));
   }
 }

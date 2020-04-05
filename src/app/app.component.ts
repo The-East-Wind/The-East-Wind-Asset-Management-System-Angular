@@ -1,3 +1,4 @@
+import { EmployeeService } from './employee.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth/auth.service';
@@ -15,28 +16,6 @@ export class AppComponent implements OnInit {
   isManager: boolean;
   userDesignation: string;
   home: string[];
-  /* authenticate = (authCredentials: Credential) => {
-    if (authCredentials !== undefined) {
-      this.userDesignation = authCredentials.designation;
-      switch (this.userDesignation) {
-        case 'Employee': this.auth.isEmployee = true; break;
-        case 'Manager': this.auth.isManager = true; break;
-        case 'Admin': this.auth.isAdmin = true; break;
-      }
-      this.isAuthenticated = true;
-      const path = '/' + authCredentials.designation.toLowerCase();
-      this.router.navigate([path]);
-    }
-  }
- */
-  /* logout = () => {
-    switch (this.userDesignation) {
-      case 'Employee': this.auth.isEmployee = false; break;
-      case 'Manager': this.auth.isManager = false; break;
-      case 'Admin': this.auth.isAdmin = false; break;
-    }
-    this.isAuthenticated = false;
-  } */
   changeNavBar(event: Event): void {
     switch (this.router.routerState.snapshot.url) {
       case '/login' : this.isAuthenticated = false ; break;
