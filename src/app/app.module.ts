@@ -32,7 +32,6 @@ import { NewRequestComponent } from './new-request/new-request.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { EmployeeService } from './employee.service';
-import { AcknowledgementComponent } from './acknowledgement/acknowledgement.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AdminComponent } from './admin/admin.component';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -41,6 +40,7 @@ import { ViewRequestComponent } from './view-request/view-request.component';
 import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ManageAssetComponent } from './manage-asset/manage-asset.component';
+import { ModifyAssetComponent } from './modify-asset/modify-asset.component';
 
 @NgModule({
   declarations: [
@@ -51,11 +51,11 @@ import { ManageAssetComponent } from './manage-asset/manage-asset.component';
     ManagerComponent,
     AccessDeniedComponent,
     NewRequestComponent,
-    AcknowledgementComponent,
     AdminComponent,
     NewAssetComponent,
     ViewRequestComponent,
-    ManageAssetComponent
+    ManageAssetComponent,
+    ModifyAssetComponent
   ],
   imports: [
     BrowserModule,

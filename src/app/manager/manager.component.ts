@@ -74,7 +74,7 @@ export class ManagerComponent implements OnInit {
             return throwError('Error adding Request.');
           })).subscribe((data: any) => {
             // console.log(data);
-            this._snackBar.open(`Request was submitted successfully ! Request ID is: ${data.id}`, '', {
+            this._snackBar.open(`Your Request was submitted successfully ! Request ID is: ${data.id}`, '', {
               duration: 10000, panelClass: 'success', verticalPosition: 'bottom'
             });
           });

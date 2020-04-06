@@ -1,3 +1,4 @@
+import { ModifyAssetComponent } from './../modify-asset/modify-asset.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
@@ -32,7 +33,6 @@ export class ManageAssetComponent implements OnInit {
     this._assetService.getAssets().subscribe((data: any) => {
       this.assets = data;
       this.assetDataSource = new MatTableDataSource<Asset>(this.assets);
-      console.log(this.assetDataSource.data);
       this.columnHeaders = Object.keys(this.assets[0]).filter(key => key !== 'allottedTo');
       this.columnHeaders.unshift('select');
       this.assetDataSource.filterPredicate = (filterData, filter: string) => {
@@ -46,26 +46,62 @@ export class ManageAssetComponent implements OnInit {
   }
 
   deleteAsset(): void {
-    if (this.selectedAsset.hasValue) {
+    if (this.selectedAsset.hasValue()) {
       this._assetService.deleteAssetWithId(this.selectedAsset.selected[0]).pipe(catchError((error: HttpErrorResponse) => {
         this.displaySnackBar('Uh-oh! An error occured. Please try again later', false);
         return throwError('Error deleting asset');
       })).subscribe((data: any) => {
         console.log(data);
-        this.displaySnackBar('Asset Deleted Successfully!', true);
-        this.assets = this.assets.filter(asset => asset.id !== this.selectedAsset.selected[0].id);
-        this.assetDataSource.data = this.assets;
         this.selectedAsset.clear();
+        this.fetchAssets();
+        this.displaySnackBar('Asset Deleted Successfully!', true);
       });
     }
   }
 
   modifyAsset(): void {
-    console.log(this.selectedAsset.selected[0]);
+    if (this.selectedAsset.hasValue()) {
+      const assetSelected = this.selectedAsset.selected[0];
+      const dialogRef = this._dialog.open(ModifyAssetComponent, {
+        maxWidth: '450px', maxHeight: '600px', data: assetSelected
+      });
+      dialogRef.afterClosed().subscribe((modifiedData: Asset) => {
+          this.selectedAsset.clear();
+          if (modifiedData !== undefined) {
+            console.log(modifiedData);
+            this._assetService.updateAsset(modifiedData).pipe(catchError((error: HttpErrorResponse) => {
+              this.displaySnackBar('Uh-oh! An error occured. Please try again later', false);
+              console.log(error.status, error.error);
+              return throwError('Error updating asset');
+            })).subscribe((data: any) => {
+              console.log(data);
+              this.displaySnackBar('Asset details modified successfully!', true);
+            });
+          }
+      });
+    }
   }
 
   returnAsset(): void {
-    console.log(this.selectedAsset.selected[0]);
+    if (this.selectedAsset.hasValue()) {
+      const assetSelected = this.selectedAsset.selected[0];
+      if (assetSelected.availability === 'Available') {
+        this.displaySnackBar('Cannot return asset which is not allotted to anyone.', false);
+      } else {
+        assetSelected.allotedTo = null;
+        assetSelected.availability = 'Available';
+        this._assetService.updateAsset(assetSelected).pipe(catchError((error: HttpErrorResponse) => {
+          this.displaySnackBar('Uh-oh! An error occurred. Please try again later.', false);
+          console.log(error.status, error.error);
+          return throwError('Error Updating Asset');
+        })).subscribe((data: any) => {
+          console.log('Asset returned successfully', data);
+          this.selectedAsset.clear();
+          this.fetchAssets();
+          this.displaySnackBar('Asset Returned Successfully!', true);
+        });
+      }
+    }
   }
 
   displaySnackBar(message: string, type: boolean) {
