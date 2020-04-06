@@ -2,26 +2,49 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.3.
 
-## Development server
+# Requirements 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+To run this project you need 
+* angular-cli
+> npm install -g @angular/cli
 
-## Code scaffolding
+* [json-server](https://www.npmjs.com/package/json-server)
+Run
+> npm install -g json-server
+to install json-server using npm.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+# Running the application
 
-## Build
+Inside /for json-server directory you will find db.json file.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+**Copy this file into a folder outside of your angular working directory.** (This is important because if you keep the file inside angular working directory the development server will reload whenever a change is made in the db.json file).
 
-## Running unit tests
+from this directory run json-server using
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+> json-server --watch db.json
 
-## Running end-to-end tests
+Check if json-server is running by going to 'http://localhost:3000' from your browser.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Start the application by running
 
-## Further help
+> ng serve
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+From the root of your angular working directory
+
+Go to 'http://localhost:4200' 
+
+You will see the home screen and you can start using the application.
+
+Find the login credentials in db.json file.
+
+# Note
+
+Each time you close the application make sure your remove all the requests and assets your added during that run of the application from the 
+db.json manually.
+This is because the id for requests and asset is generated using a variable whose intial value is reset during each run of the application.
+
+
+
+
+
+
