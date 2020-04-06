@@ -88,7 +88,7 @@ export class ManageAssetComponent implements OnInit {
       if (assetSelected.availability === 'Available') {
         this.displaySnackBar('Cannot return asset which is not allotted to anyone.', false);
       } else {
-        assetSelected.allotedTo = null;
+        assetSelected.allottedTo = null;
         assetSelected.availability = 'Available';
         this._assetService.updateAsset(assetSelected).pipe(catchError((error: HttpErrorResponse) => {
           this.displaySnackBar('Uh-oh! An error occurred. Please try again later.', false);

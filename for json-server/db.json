@@ -6,7 +6,7 @@
       "assetDescription": "4Gb RAM-500Gb HDD-i5 7th gen",
       "assetCategory": "Laptop",
       "availability": "Available",
-      "allotedTo": null
+      "allottedTo": null
     },
     {
       "id": 2,
@@ -20,7 +20,7 @@
       "id": 3,
       "assetName": "Macbook Pro",
       "assetDescription": "8Gb RAM-512Gb SSD-i7 9th gen",
-      "availability": "Available",
+      "availability": "Not Available",
       "allottedTo": {
         "employeeId": 10004,
         "employeeName": "Sudhanshu Rajpal",
@@ -28,17 +28,15 @@
         "employeeDepartment": "Java",
         "employeeDesignation": "Employee"
       },
-      "assetCategory": "Laptop",
-      "allotedTo": null
+      "assetCategory": "Laptop"
     },
     {
       "id": 4,
       "assetName": "Hp Deskjet",
       "assetDescription": "Laser Color Printer",
       "availability": "Not Available",
-      "allottedTo": {},
       "assetCategory": "Printer",
-      "allotedTo": {
+      "allottedTo": {
         "employeeId": 10006,
         "employeeName": "Ghanta Surya Bhagavan ",
         "username": "g.surya.bhagavan",
@@ -141,7 +139,7 @@
         "assetName": "HP Pavillion",
         "assetDescription": "4Gb RAM-500Gb HDD-i5 7th gen",
         "availability": "Available",
-        "allottedTo": {},
+        "allottedTo": null,
         "assetCategory": "Laptop"
       }
     },
@@ -168,8 +166,14 @@
         "id": 4,
         "assetName": "Hp Deskjet",
         "assetDescription": "Laser Color Printer",
-        "availability": "Available",
-        "allottedTo": {},
+        "availability": "Not Available",
+        "allottedTo": {
+          "employeeId": 10006,
+          "employeeName": "Ghanta Surya Bhagavan ",
+          "username": "g.surya.bhagavan",
+          "employeeDepartment": "Java",
+          "employeeDesignation": "Employee"
+        },
         "assetCategory": "Printer"
       }
     },
@@ -197,7 +201,13 @@
         "assetName": "Tp-Link Archer C6",
         "assetDescription": "Wireless Dual Band Router-450 Mbps",
         "availability": "Not Available",
-        "allottedTo": {},
+        "allottedTo": {
+          "employeeId": 10006,
+          "employeeName": "Ghanta Surya Bhagavan ",
+          "username": "g.surya.bhagavan",
+          "employeeDepartment": "Java",
+          "employeeDesignation": "Employee"
+        },
         "assetCategory": "Router"
       }
     }

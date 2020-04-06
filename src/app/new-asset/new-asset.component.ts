@@ -28,7 +28,7 @@ export class NewAssetComponent implements OnInit {
   addNewAsset(): void {
     if (this.newAssetForm.valid) {
       const newAsset = new Asset();
-      newAsset.allotedTo = null;
+      newAsset.allottedTo = null;
       newAsset.availability = 'Available';
       newAsset.assetName = this.newAssetForm.value.assetName;
       newAsset.assetDescription = this.newAssetForm.value.assetDescription;

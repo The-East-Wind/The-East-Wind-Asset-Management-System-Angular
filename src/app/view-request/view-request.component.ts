@@ -61,7 +61,7 @@ export class ViewRequestComponent implements OnInit {
           this.disableAll = false;
           return throwError('Error Updating Request Status');
         })).subscribe((data: any) => {
-          this.currentRequest.requestedAsset.allotedTo = this.currentRequest.requestedFor;
+          this.currentRequest.requestedAsset.allottedTo = this.currentRequest.requestedFor;
           this.currentRequest.requestedAsset.availability = 'Not Available';
           this._assetService.updateAsset(this.currentRequest.requestedAsset).pipe(catchError((error: HttpErrorResponse) => {
             this._snackBar.open('Uh-oh! An error occured. Please Try again later.', '', {

@@ -29,10 +29,10 @@ export class ModifyAssetComponent implements OnInit {
     if (this.modifyAssetForm.valid) {
       if (this.modifyAssetForm.dirty) {
         const modifiedData: Asset = this.modifyAssetForm.value;
-        if (this.data.allotedTo === undefined) {
-          modifiedData.allotedTo = null;
+        if (this.data.allottedTo === undefined) {
+          modifiedData.allottedTo = null;
         } else {
-          modifiedData.allotedTo = this.data.allotedTo;
+          modifiedData.allottedTo = this.data.allottedTo;
         }
         this.dialogRef.close(modifiedData);
       } else {

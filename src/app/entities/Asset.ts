@@ -3,6 +3,6 @@ export class Asset {
   assetName: string;
   assetDescription: string;
   availability: string;
-  allotedTo: object;
+  allottedTo: object;
   assetCategory: string;
 }
