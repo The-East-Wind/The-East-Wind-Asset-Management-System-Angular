@@ -10,7 +10,9 @@ To run this project you need
 
 * [json-server](https://www.npmjs.com/package/json-server)
 Run
+
 > npm install -g json-server
+
 to install json-server using npm.
 
 # Running the application
