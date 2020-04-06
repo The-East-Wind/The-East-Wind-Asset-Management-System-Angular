@@ -200,62 +200,6 @@
         "allottedTo": {},
         "assetCategory": "Router"
       }
-    },
-    {
-      "requestedAsset": {
-        "id": 2,
-        "assetName": "ASUS Vivobook",
-        "assetDescription": "8Gb RAM-1Tb HDD-i5 8th gen",
-        "availability": "Available",
-        "allottedTo": null,
-        "assetCategory": "Laptop"
-      },
-      "requestedBy": {
-        "employeeId": 10002,
-        "employeeName": "Aanantha Krishnan",
-        "username": "aananthakrishnan",
-        "employeeDepartment": "Java",
-        "employeeDesignation": "Manager"
-      },
-      "status": "Pending",
-      "fromDate": "2020-04-05",
-      "toDate": "2020-04-05",
-      "requestedFor": {
-        "employeeId": 10005,
-        "employeeName": "Sahil Singla",
-        "username": "sahil.singla",
-        "employeeDepartment": "Finance",
-        "employeeDesignation": "Employee"
-      },
-      "id": 7
-    },
-    {
-      "requestedAsset": {
-        "allotedTo": null,
-        "availability": "Available",
-        "assetName": "Linksys EA8300",
-        "assetDescription": "1 WAN, 4 1-Gbps LAN, 1 USB 3.0",
-        "assetCategory": "Router",
-        "id": 10
-      },
-      "requestedBy": {
-        "employeeId": 10002,
-        "employeeName": "Aanantha Krishnan",
-        "username": "aananthakrishnan",
-        "employeeDepartment": "Java",
-        "employeeDesignation": "Manager"
-      },
-      "status": "Pending",
-      "fromDate": "2020-04-05",
-      "toDate": "2020-04-05",
-      "requestedFor": {
-        "employeeId": 10001,
-        "employeeName": "Hari Mani",
-        "username": "harimani",
-        "employeeDepartment": "Java",
-        "employeeDesignation": "Employee"
-      },
-      "id": 8
     }
   ],
   "employees": [
