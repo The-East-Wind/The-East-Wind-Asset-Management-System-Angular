@@ -17,6 +17,14 @@ to install json-server using npm.
 
 # Running the application
 
+### Clone the repository
+
+> git clone https://github.com/The-East-Wind/The-East-Wind-Asset-Management-System-Angular.git
+
+### After cloning go into the cloned repository and run
+
+> npm install
+
 Inside /for json-server directory you will find db.json file.
 
 **Copy this file into a folder outside of your angular working directory.** (This is important because if you keep the file inside angular working directory the development server will reload whenever a change is made in the db.json file).
