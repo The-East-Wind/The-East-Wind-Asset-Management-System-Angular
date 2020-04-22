@@ -37,7 +37,6 @@ export class NewRequestComponent implements OnInit {
     this.maxToDate = new Date(fromDate.getFullYear(), fromDate.getMonth() + 3, fromDate.getDate());
   }
   submitFormData(): void {
-    this.validEmployee = true;
     if (this.assetRequestForm.valid) {
       this._employeeService.fetchEmployeeWithId(Number(this.assetRequestForm.value.requestedFor)).subscribe((data: any) => {
         if (data.length === 0) {
@@ -54,6 +53,7 @@ export class NewRequestComponent implements OnInit {
     }
   }
   closeDialog(): void {
+    this.assetRequestForm.reset();
     this.dialogRef.close();
   }
 }

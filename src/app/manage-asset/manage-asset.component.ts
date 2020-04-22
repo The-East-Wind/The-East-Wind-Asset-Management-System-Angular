@@ -75,6 +75,7 @@ export class ManageAssetComponent implements OnInit {
               return throwError('Error updating asset');
             })).subscribe((data: any) => {
               console.log(data);
+              this.fetchAssets();
               this.displaySnackBar('Asset details modified successfully!', true);
             });
           }
