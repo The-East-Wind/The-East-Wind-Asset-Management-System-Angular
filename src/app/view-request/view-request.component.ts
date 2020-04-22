@@ -102,7 +102,7 @@ export class ViewRequestComponent implements OnInit {
     if (this.index < this.requests.length) {
       this.currentRequest = this.requests[this.index];
     } else {
-      noPendingRequest = true;
+      this.noPendingRequest = true;
     }
   }
 }
